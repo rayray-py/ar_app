@@ -34,14 +34,8 @@ const styles = {
   buttonContainerStyle: {
     marginVertical: 8,
   },
-  emailButton: {
-    backgroundColor: MAIN_COLOR,
-  },
   disabledButton: {
-    backgroundColor: '#a0eadf',
-  },
-  twitterButton: {
-    backgroundColor: '#03a9f4',
+    backgroundColor: '#ffb384',
   },
 };
 
@@ -85,8 +79,8 @@ export const LoginForm = (props) => {
       <Button
         title={tabLabel}
         containerViewStyle={styles.buttonContainerStyle}
-        buttonStyle={styles.emailButton}
-        onPress={() => onPress({ email, password })}
+        backgroundColor={MAIN_COLOR}
+        onPress={() => onPress(email, password)}
         borderWidth={1.3}
         loading={isLoading}
         disabled={!isEnabled || isLoading}

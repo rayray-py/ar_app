@@ -106,8 +106,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSignUp: (email, password) => dispatch(signUp({ email, password })),
-    onSignIn: (email, password) => dispatch(signIn({ email, password })),
+    onSignUp: (email, password) => dispatch(signUp(email, password)),
+    onSignIn: (email, password) => dispatch(signIn(email, password)),
   };
 };
 

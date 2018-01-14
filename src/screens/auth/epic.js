@@ -7,15 +7,16 @@ import * as actions from './actions';
 
 const signUpEpic = aciton$ =>
   aciton$.ofType(actions.SIGN_UP)
-    .exhaustMap(({ payload }) => {
+    .exhaustMap((payload) => {
       return Observable.fromPromise(
-          firebase.auth().createUserWithEmailAndPassword(payload),
+          firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password),
         )
-        .mapTo(actions.successSignUp())
+        .map(user => actions.successSignUp(user))
         .do(() => Actions.reset('root'))
         .catch(() =>
           Observable.of(actions.failSignUp())
-        );
+        )
+        .ignoreElements();;
     });
 
 const signInEpic = aciton$ =>
@@ -24,11 +25,12 @@ const signInEpic = aciton$ =>
       return Observable.fromPromise(
           firebase.auth().signInWithEmailAndPassword(payload),
         )
-        .mapTo(actions.successSignIn())
+        .map(user => actions.successSignIn(user))
         .do(() => Actions.reset('root'))
         .catch(() =>
           Observable.of(actions.failSignIn())
-        );
+        )
+        .ignoreElements();;
     });
 
 export default combineEpics(
